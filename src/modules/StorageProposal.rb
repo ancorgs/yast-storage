@@ -6333,6 +6333,11 @@ module Yast
 
 
     def QueryProposalPassword
+      # Hack to prove that bug#996007 is somehow related to creating and
+      # restoring backups
+      return true
+      # That was it :-)
+
       no_query = false
       Storage.CreateTargetBackup("query_prop_passwd")
       Storage.RestoreTargetBackup("initial")
