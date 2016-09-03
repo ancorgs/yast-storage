@@ -6363,12 +6363,13 @@ module Yast
     def QueryProposalPassword
       no_query = false
       Storage.CreateTargetBackup("query_prop_passwd")
-      Storage.RestoreTargetBackup("initial")
-      if !Builtins.isempty(GetProposalPassword()) ||
-          !@proposal_create_vg &&
-            !Storage.NeedVgPassword(Storage.GetTargetMap, "/dev/system")
+      # Proving that the call to RestoreTargetBackup causes the breakage
+      #Storage.RestoreTargetBackup("initial")
+      #if !Builtins.isempty(GetProposalPassword()) ||
+      #    !@proposal_create_vg &&
+      #      !Storage.NeedVgPassword(Storage.GetTargetMap, "/dev/system")
         no_query = true
-      end
+      #end
       Storage.RestoreTargetBackup("query_prop_passwd")
       Storage.DisposeTargetBackup("query_prop_passwd")
       return true if no_query
